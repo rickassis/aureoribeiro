@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
@@ -34,34 +34,4 @@
 <script>
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-const input = document.getElementById("texto");
-
-const imagem = new Image();
-img src="imagem.png" alt="Imagem do canvas" width="600";
-
-function desenhar() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(imagem, 0, 0, canvas.width, canvas.height);
-
-  ctx.font = "bold 90px Arial";
-  ctx.fillStyle = "white";
-  ctx.textAlign = "center";
-
-  ctx.fillText(input.value, canvas.width / 2, 900);
-}
-
-imagem.onload = desenhar;
-
-input.addEventListener("input", desenhar);
-
-function salvar() {
-  const link = document.createElement("a");
-  link.download = "imagem.png";
-  link.href = canvas.toDataURL("image/png");
-  link.click();
-}
-</script>
-
-</body>
-</html>
-
+const input = document.
