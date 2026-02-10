@@ -127,11 +127,11 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(imagem, 0, 0, canvas.width, canvas.height);
 
-      ctx.font = "90px 'Bebas Neue'";
+      ctx.font = "200px 'Bebas Neue'";
       ctx.fillStyle = "white";
       ctx.textAlign = "center";
 
-      ctx.fillText(input.value.toUpperCase(), canvas.width / 2, 900);
+      ctx.fillText(input.value.toUpperCase(), canvas.width / 2, 400);
     }
 
     imagem.onload = desenhar;
