@@ -34,4 +34,33 @@
 <script>
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-const input = document.
+const input = document.getElementById("texto");
+
+// carrega a imagem corretamente
+const imagem = new Image();
+imagem.src = "imagem.png";
+
+function desenhar() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(imagem, 0, 0, canvas.width, canvas.height);
+
+  ctx.font = "bold 90px Arial";
+  ctx.fillStyle = "white";
+  ctx.textAlign = "center";
+
+  ctx.fillText(input.value, canvas.width / 2, 900);
+}
+
+imagem.onload = desenhar;
+input.addEventListener("input", desenhar);
+
+function salvar() {
+  const link = document.createElement("a");
+  link.download = "imagem.png";
+  link.href = canvas.toDataURL("image/png");
+  link.click();
+}
+</script>
+
+</body>
+</html>
