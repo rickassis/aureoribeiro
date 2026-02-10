@@ -1,70 +1,165 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <title>Gerador de Imagem</title>
+
+  <!-- Fonte Bebas Neue -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
   <style>
     body {
-      text-align: center;
+      margin: 0;
+      padding: 0;
+      background: #111;
+      color: #fff;
       font-family: Arial, sans-serif;
-      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
     }
-    canvas {
-      margin-top: 20px;
-      border: 1px solid #ccc;
-      max-width: 100%;
+
+    .container {
+      width: 100%;
+      max-width: 720px;
+      padding: 20px;
+      text-align: center;
     }
-    input, button {
-      padding: 10px;
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    input {
+      width: 90%;
+      max-width: 400px;
+      padding: 12px;
+      font-size: 18px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background: #1f8f3f;
+      color: white;
+      border: none;
+      padding: 12px 18px;
       font-size: 16px;
-      margin-top: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #26b153;
+    }
+
+    canvas {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 8px;
+      margin: 10px auto;
+      display: block;
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    footer a {
+      color: #00ff88;
+      text-decoration: none;
+      font-weight: bold;
+      margin-left: 5px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
+
 <body>
+  <div class="container">
 
-<h2>Digite o texto</h2>
-<input id="texto" placeholder="Digite aqui">
+    <h2>Digite o texto</h2>
 
-<br>
-<button onclick="salvar()">Salvar imagem</button>
+    <input id="texto" placeholder="Digite aqui">
 
-<canvas id="canvas" width="1080" height="1080"></canvas>
+    <div class="buttons">
+      <button onclick="salvar()">Salvar imagem</button>
+      <button onclick="compartilhar()">Compartilhar imagem</button>
+    </div>
 
-<script>
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-const input = document.getElementById("texto");
+    <canvas id="canvas" width="1080" height="1080"></canvas>
 
-// carrega a imagem corretamente
-const imagem = new Image();
-imagem.src = "imagem.png";
+    <footer>
+      Desenvolvido por
+      <a href="https://www.instagram.com/rickassisrj" target="_blank">
+        @rickassisrj
+      </a>
+    </footer>
 
-function desenhar() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(imagem, 0, 0, canvas.width, canvas.height);
+  </div>
 
-  ctx.font = "200px 'Bebas Neue'";
-  ctx.fillStyle = "white";
-  ctx.textAlign = "center";
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const input = document.getElementById("texto");
 
-  ctx.fillText(input.value, canvas.width / 2, 400);
-}
+    const imagem = new Image();
+    imagem.src = "imagem.png";
 
-imagem.onload = () => {
-  document.fonts.ready.then(desenhar);
-};
-input.addEventListener("input", desenhar);
+    function desenhar() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(imagem, 0, 0, canvas.width, canvas.height);
 
-function salvar() {
-  const link = document.createElement("a");
-  link.download = "imagem.png";
-  link.href = canvas.toDataURL("image/png");
-  link.click();
-}
-</script>
+      ctx.font = "90px 'Bebas Neue'";
+      ctx.fillStyle = "white";
+      ctx.textAlign = "center";
+
+      ctx.fillText(input.value.toUpperCase(), canvas.width / 2, 900);
+    }
+
+    imagem.onload = desenhar;
+    input.addEventListener("input", desenhar);
+
+    function salvar() {
+      const link = document.createElement("a");
+      link.download = "imagem.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    }
+
+    async function compartilhar() {
+      const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
+      const file = new File([blob], "imagem.png", { type: "image/png" });
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        navigator.share({
+          files: [file],
+          title: "Imagem personalizada",
+          text: "Criei essa imagem personalizada 👇"
+        });
+      } else {
+        alert("Compartilhamento não suportado neste dispositivo.");
+      }
+    }
+  </script>
 
 </body>
 </html>
+
