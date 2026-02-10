@@ -1,165 +1,162 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Gerador de Imagem</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Fonte Bebas Neue -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<title>Gerador de Imagem</title>
 
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #111;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-    }
+<!-- Fonte Bebas Neue -->
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
-    .container {
-      width: 100%;
-      max-width: 720px;
-      padding: 20px;
-      text-align: center;
-    }
+<style>
+  * {
+    box-sizing: border-box;
+  }
 
-    h2 {
-      margin-bottom: 10px;
-    }
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
 
-    input {
-      width: 90%;
-      max-width: 400px;
-      padding: 12px;
-      font-size: 18px;
-      border-radius: 6px;
-      border: none;
-      outline: none;
-      text-align: center;
-      margin-bottom: 10px;
-    }
+  body {
+    min-height: 100vh;
+    background: #0f0f0f;
+    color: #fff;
+    font-family: 'Bebas Neue', Arial, sans-serif;
 
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 15px;
-      flex-wrap: wrap;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-    button {
-      background: #1f8f3f;
-      color: white;
-      border: none;
-      padding: 12px 18px;
-      font-size: 16px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
+  .container {
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
+    text-align: center;
+  }
 
-    button:hover {
-      background: #26b153;
-    }
+  input {
+    width: 100%;
+    padding: 14px;
+    font-size: 20px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 15px;
+  }
 
-    canvas {
-      width: 100%;
-      max-width: 500px;
-      border-radius: 8px;
-      margin: 10px auto;
-      display: block;
-    }
+  .buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
 
-    footer {
-      margin-top: 20px;
-      font-size: 14px;
-      color: #aaa;
-    }
+  button {
+    flex: 1;
+    padding: 14px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background: #1f8f2f;
+    color: white;
+  }
 
-    footer a {
-      color: #00ff88;
-      text-decoration: none;
-      font-weight: bold;
-      margin-left: 5px;
-    }
+  button:hover {
+    opacity: 0.9;
+  }
 
-    footer a:hover {
-      text-decoration: underline;
-    }
-  </style>
+  canvas {
+    width: 100%;
+    max-width: 360px;
+    border-radius: 10px;
+  }
+
+  footer {
+    margin-top: 20px;
+    font-size: 14px;
+    opacity: 0.8;
+  }
+
+  footer a {
+    color: #4caf50;
+    text-decoration: none;
+    font-weight: bold;
+  }
+</style>
 </head>
 
 <body>
-  <div class="container">
 
-    <h2>Digite o texto</h2>
+<div class="container">
 
-    <input id="texto" placeholder="Digite aqui">
+<input id="texto" placeholder="Digite o texto">
 
-    <div class="buttons">
-      <button onclick="salvar()">Salvar imagem</button>
-      <button onclick="compartilhar()">Compartilhar imagem</button>
-    </div>
+<div class="buttons">
+  <button onclick="salvar()">Salvar imagem</button>
+  <button onclick="compartilhar()">Compartilhar imagem</button>
+</div>
 
-    <canvas id="canvas" width="1080" height="1080"></canvas>
+<canvas id="canvas" width="1080" height="1080"></canvas>
 
-    <footer>
-      Desenvolvido por
-      <a href="https://www.instagram.com/rickassisrj" target="_blank">
-        @rickassisrj
-      </a>
-    </footer>
+<footer>
+  Desenvolvido por
+  <a href="https://instagram.com/rickassisrj" target="_blank">
+    @rickassisrj
+  </a>
+</footer>
 
-  </div>
+</div>
 
-  <script>
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
-    const input = document.getElementById("texto");
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+const input = document.getElementById("texto");
 
-    const imagem = new Image();
-    imagem.src = "imagem.png";
+const imagem = new Image();
+imagem.src = "imagem.png";
 
-    function desenhar() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(imagem, 0, 0, canvas.width, canvas.height);
+function desenhar() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(imagem, 0, 0, canvas.width, canvas.height);
 
-      ctx.font = "200px 'Bebas Neue'";
-      ctx.fillStyle = "white";
-      ctx.textAlign = "center";
+  ctx.fillStyle = "white";
+  ctx.textAlign = "center";
+  ctx.font = "bold 140px 'Bebas Neue'";
 
-      ctx.fillText(input.value.toUpperCase(), canvas.width / 2, 400);
-    }
+  // POSIÇÃO DO TEXTO
+  ctx.fillText(input.value.toUpperCase(), canvas.width / 2, 420);
+}
 
-    imagem.onload = desenhar;
-    input.addEventListener("input", desenhar);
+imagem.onload = desenhar;
+input.addEventListener("input", desenhar);
 
-    function salvar() {
-      const link = document.createElement("a");
-      link.download = "imagem.png";
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-    }
+function salvar() {
+  const link = document.createElement("a");
+  link.download = "imagem.png";
+  link.href = canvas.toDataURL("image/png");
+  link.click();
+}
 
-    async function compartilhar() {
-      const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
+async function compartilhar() {
+  if (navigator.share) {
+    canvas.toBlob(async (blob) => {
       const file = new File([blob], "imagem.png", { type: "image/png" });
 
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        navigator.share({
-          files: [file],
-          title: "Imagem personalizada",
-          text: "Criei essa imagem personalizada 👇"
-        });
-      } else {
-        alert("Compartilhamento não suportado neste dispositivo.");
-      }
-    }
-  </script>
+      await navigator.share({
+        files: [file],
+        title: "Imagem Gerada"
+      });
+    });
+  } else {
+    alert("Compartilhamento não suportado neste navegador.");
+  }
+}
+</script>
 
 </body>
 </html>
+
 
